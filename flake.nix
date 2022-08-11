@@ -12,8 +12,8 @@
         allowUnfree = true;
       };
     };
-    inherit (pkgs) lib;
-    inherit (lib) concatStringsSep attrValues mapAttrs;
+    inherit (nixpkgs) lib;
+    inherit (lib) concatStringsSep attrValues mapAttrs listToAttrs;
   in {
     devShells.${system}.default = pkgs.mkShell {
       name = "devshell";
@@ -26,7 +26,19 @@
         )}:nixpkgs-overlays=$(pwd)/compat/overlay.nix"
       '';
     };
-    inherit pkgs; # pra poder usar no nix-repl fácil só com :lf
+    nixosConfigurations.${system} = let
+      node = name: lib.nixosSystem {
+        inherit pkgs;
+        specialArgs = {
+          inherit self;
+        };
+        modules = [ "${self}/nodes/${name}/" ];
+      };
+      nodes = names: listToAttrs (map (name: { inherit name; value = node name; }) names);
+    in nodes [
+      "demo"
+    ];
+    inherit pkgs lib; # pra poder usar no nix-repl fácil só com :lf
     overlays = {
       this = import ./overlay.nix self;
     };
