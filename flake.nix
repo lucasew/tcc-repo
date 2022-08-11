@@ -27,5 +27,8 @@
       '';
     };
     inherit pkgs; # pra poder usar no nix-repl fácil só com :lf
+    overlays = {
+      this = import ./overlay.nix self;
+    };
   };
 }
