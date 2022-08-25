@@ -35,6 +35,6 @@ Hostname: ${config.network.hostname}
 
   # não mexe aqui a não ser que vá resetar a máquina
   # mesmo resetando a máquina mexer aqui não é necessário
-  system.stateVersion = "22.05";
+  system.stateVersion = lib.mkDefault "22.05";
 
 }
