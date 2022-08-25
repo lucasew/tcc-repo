@@ -26,8 +26,9 @@
         )}:nixpkgs-overlays=$(pwd)/compat/overlay.nix"
       '';
     };
-    nixosConfigurations.${system} = let
+    nixosConfigurations = let
       node = name: lib.nixosSystem {
+        inherit system;
         inherit pkgs;
         specialArgs = {
           inherit self;
