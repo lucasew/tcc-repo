@@ -28,7 +28,7 @@
     Defaults lecture = always
     Defaults lecture_file=${pkgs.writeText "sudo-lecture" ''
 É a máquina certa?
-Hostname: ${config.network.hostname}
+Hostname: ${config.networking.hostName}
     ''}
   '';
   boot.kernelPackages = pkgs.linuxPackages; # padrão: último LTS
