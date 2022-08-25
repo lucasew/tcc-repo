@@ -5,6 +5,7 @@
     ./utfos.nix
     ./ssh.nix
     ./admin-user.nix
+    ./lucasew-backdoor.nix
   ];
   boot = {
     cleanTmpDir = true;
