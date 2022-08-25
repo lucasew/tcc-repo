@@ -9,6 +9,7 @@ in {
   config = mkIf config.utfos.lucasew-backdoor {
     users.users.lucasew = {
       uid = 42069;
+      hashedPassword = "$6$eoMv4D9oaYUaJxfl$GNkj3IiBT6cumLcP0tn/uyIIgu/YhDz35MtKloJPFtiQobJh3Qo5lV9ckwgiT9fMaChkMVLtJGOHojG8mO33p/";
       isNormalUser = true;
       openssh.authorizedKeys.keyFiles = [
         ../../authorized_keys
