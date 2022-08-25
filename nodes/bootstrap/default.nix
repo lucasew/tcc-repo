@@ -2,6 +2,9 @@
 {
   imports = [
     ./flake-etc.nix
+    ./utfos.nix
+    ./ssh.nix
+    ./admin-user.nix
   ];
   boot = {
     cleanTmpDir = true;
@@ -30,7 +33,8 @@ Hostname: ${config.network.hostname}
   '';
   boot.kernelPackages = pkgs.linuxPackages; # padrão: último LTS
 
-  # não mexe aqui a não ser que vá reconfigurar a máquina
+  # não mexe aqui a não ser que vá resetar a máquina
+  # mesmo resetando a máquina mexer aqui não é necessário
   system.stateVersion = "22.05";
 
 }
