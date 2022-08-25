@@ -37,7 +37,7 @@
       nodes = names: listToAttrs (map (name: { inherit name; value = node name; }) names);
     in nodes [
       "demo"
-      "poc-ubuntu"
+      "poc_ubuntu"
     ];
     inherit pkgs lib; # pra poder usar no nix-repl fácil só com :lf
     overlays = {
