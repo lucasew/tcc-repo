@@ -23,6 +23,7 @@
         "nix-command"
         "flakes"
       ];
+      trusted-users = [ "@wheel" ];
     };
   };
 
