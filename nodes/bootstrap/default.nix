@@ -24,6 +24,10 @@
       ];
     };
   };
+
+  # internet
+  networking.networkmanager.enable = true;
+
   # configurações do sudo
   security.sudo.extraConfig = ''
     Defaults lecture = always
