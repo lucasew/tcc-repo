@@ -2,6 +2,7 @@
   description = "UTFOS";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
   outputs = { self, nixpkgs, ... }@args:
   let
