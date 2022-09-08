@@ -7,6 +7,12 @@
   # gui
   environment.systemPackages = with pkgs; [
     htop
+    chromium
+    firefox
+    spotify
   ];
-
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
 }
