@@ -13,6 +13,7 @@ in {
     ./wallpaper.nix
     ./motd.nix
     ./keyboard.nix
+    ./containers.nix
     ../common/default.nix
   ];
   utfos.machine-group = [ "poc" ];
