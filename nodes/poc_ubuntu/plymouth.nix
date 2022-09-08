@@ -1,4 +1,9 @@
-{config, pkgs, lib, ...}: {
+{config, pkgs, lib, ...}:
+let
+  v86d = config.boot.kernelPackages.v86d.overrideAttrs (old: {
+    hardeningDisable = [ "all" ];
+  });
+in{
   boot.plymouth = {
     enable = true;
     theme = "breeze"; # TODO: trocar a engrenagem girando por algo menos tosco
@@ -18,11 +23,9 @@
     };
   };
   boot.initrd.kernelModules = [ "uvesafb" ];
-  boot.initrd.extraFiles."/bin/v86d".source = pkgs.runCommand "v86d" {} ''
-    cp "${config.boot.kernelPackages.v86d}/bin/v86d" $out
-  '';
+  boot.initrd.extraFiles."/usr/v86d".source = v86d;
   boot.kernelParams = [
-    "video=uvesafb:1920x1080-32,mtrr:3,ywrap"
-    ''uvesafb.v86d="/bin/v86d"''
+    "video=uvesafb:mode:${config.boot.loader.grub.gfxmodeBios}-32,mtrr:3,ywrap"
+    ''uvesafb.v86d="${v86d}/bin/v86d"''
   ];
 }

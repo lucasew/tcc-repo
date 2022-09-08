@@ -10,6 +10,8 @@
     chromium
     firefox
     spotify
+    pciutils
+    usbutils
   ];
   hardware.opengl = {
     enable = true;
