@@ -1,6 +1,6 @@
-version: 3.9
+version: "3.9"
 services:
-  ldap:
+  openldap:
     image: osixia/openldap:1.5.0
     container_name: ldap
     environment:
@@ -8,8 +8,8 @@ services:
       LDAP_BASE_DN: dc=example,dc=com
       LDAP_DOMAIN: example.com
       LDAP_ADMIN_PASSWORD: password
-      DISABLE_CHOWN: true
-      LDAP_TLS: "False"
+      DISABLE_CHOWN: "true"
+      LDAP_TLS: "false"
       LDAP_SEED_INTERNAL_LDIF_PATH: "/forumsys.ldif"
     ports:
       - 389:389

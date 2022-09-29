@@ -15,11 +15,11 @@
 # dc: example
 
 # admin, example.com
-# dn: cn=admin,dc=example,dc=com
-# objectClass: simpleSecurityObject
-# objectClass: organizationalRole
-# cn: admin
-# description: LDAP administrator
+dn: cn=admin,dc=example,dc=com
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
 
 # newton, example.com
 dn: uid=newton,dc=example,dc=com
@@ -266,8 +266,8 @@ objectClass: top
 mail: jmacy-training@forumsys.com
 
 # search result
-search: 2
-result: 0 Success
+# search: 2
+# result: 0 Success
 
 # numResponses: 24
 # numEntries: 23

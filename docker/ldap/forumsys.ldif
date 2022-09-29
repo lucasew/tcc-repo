@@ -7,12 +7,12 @@
 #
 
 # example.com
-dn: dc=example,dc=com
-objectClass: top
-objectClass: dcObject
-objectClass: organization
-o: example.com
-dc: example
+# dn: dc=example,dc=com
+# objectClass: top
+# objectClass: dcObject
+# objectClass: organization
+# o: example.com
+# dc: example
 
 # admin, example.com
 dn: cn=admin,dc=example,dc=com
@@ -266,8 +266,8 @@ objectClass: top
 mail: jmacy-training@forumsys.com
 
 # search result
-search: 2
-result: 0 Success
+# search: 2
+# result: 0 Success
 
 # numResponses: 24
 # numEntries: 23
