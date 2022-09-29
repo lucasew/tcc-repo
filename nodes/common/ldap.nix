@@ -6,12 +6,13 @@
   users.ldap = {
     enable = true;
     daemon.enable = true;
+    base = "dc=example,dc=com";
     bind.policy = "soft";
-    bind.distinguishedName = "cn=admin,dc=example,dc=com";
+    bind.distinguishedName = "cn=read-only-admin,dc=example,dc=com";
     # users: riemann gauss euler euclid
     bind.passwordFile = builtins.toFile "passwd-file" "password";
-    base = "ou=mathematicians,dc=example,dc=com";
-    server = "ldap://192.168.100.50";
+    # server = "ldap://192.168.100.50";
+    server = "ldap://ldap.forumsys.com";
     # useTLS = true;
     loginPam = true;
     extraConfig = ''

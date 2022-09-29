@@ -31,7 +31,6 @@ objectClass: top
 uid: newton
 mail: newton@ldap.forumsys.com
 cn: Isaac Newton
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # einstein, example.com
 dn: uid=einstein,dc=example,dc=com
@@ -44,7 +43,6 @@ sn: Einstein
 uid: einstein
 mail: einstein@ldap.forumsys.com
 telephoneNumber: 314-159-2653
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # tesla, example.com
 dn: uid=tesla,dc=example,dc=com
@@ -60,7 +58,6 @@ mail: tesla@ldap.forumsys.com
 uidNumber: 88888
 gidNumber: 99999
 homeDirectory: home
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # galieleo, example.com
 dn: uid=galieleo,dc=example,dc=com
@@ -72,7 +69,6 @@ cn: Galileo Galilei
 sn: Galilei
 uid: galieleo
 mail: galieleo@ldap.forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # euler, example.com
 dn: uid=euler,dc=example,dc=com
@@ -84,7 +80,6 @@ uid: euler
 sn: Euler
 cn: Leonhard Euler
 mail: euler@ldap.forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # gauss, example.com
 dn: uid=gauss,dc=example,dc=com
@@ -96,7 +91,6 @@ cn: Carl Friedrich Gauss
 sn: Gauss
 uid: gauss
 mail: gauss@ldap.forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # riemann, example.com
 dn: uid=riemann,dc=example,dc=com
@@ -108,7 +102,6 @@ cn: Bernhard Riemann
 sn: Riemann
 uid: riemann
 mail: riemann@ldap.forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # euclid, example.com
 dn: uid=euclid,dc=example,dc=com
@@ -120,7 +113,6 @@ objectClass: top
 cn: Euclid
 sn: Euclid
 mail: euclid@ldap.forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # mathematicians, example.com
 dn: ou=mathematicians,dc=example,dc=com
@@ -180,7 +172,6 @@ homeDirectory: home
 cn: Test
 uidNumber: 24601
 o: Company
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # chemists, example.com
 dn: ou=chemists,dc=example,dc=com
@@ -203,7 +194,6 @@ objectClass: top
 cn: Marie Curie
 sn: Curie
 mail: curie@ldap.forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # nobel, example.com
 dn: uid=nobel,dc=example,dc=com
@@ -215,7 +205,6 @@ objectClass: top
 mail: nobel@ldap.forumsys.com
 sn: Nobel
 cn: Alfred Nobel
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # boyle, example.com
 dn: uid=boyle,dc=example,dc=com
@@ -228,7 +217,6 @@ cn: Robert Boyle
 sn: Boyle
 mail: boyle@ldap.forumsys.com
 telephoneNumber: 999-867-5309
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # pasteur, example.com
 dn: uid=pasteur,dc=example,dc=com
@@ -241,7 +229,6 @@ cn: Louis Pasteur
 uid: pasteur
 telephoneNumber: 602-214-4978
 mail: pasteur@ldap.forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # nogroup, example.com
 dn: uid=nogroup,dc=example,dc=com
@@ -277,12 +264,10 @@ objectClass: organizationalPerson
 objectClass: person
 objectClass: top
 mail: jmacy-training@forumsys.com
-userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # search result
-#search: 2
-#result: 0 Success
+search: 2
+result: 0 Success
 
 # numResponses: 24
 # numEntries: 23
-
