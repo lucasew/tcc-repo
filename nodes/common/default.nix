@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../bootstrap
+    ./ldap.nix
   ];
   utfos.machine-group = ["common"];
   users.mutableUsers = true; # LDAP vai exigir isso provavelmente

@@ -19,7 +19,7 @@ in {
             description = "${newType.description}, not containing newlines or colons";
           };
         apply = x: assert (builtins.stringLength x < 32 || abort "Username '${x}' is longer than 31 characters which is not allowed!"); x;
-        default = "COGETI";
+        default = "admin";
       };
     };
   };
