@@ -15,12 +15,12 @@
 # dc: example
 
 # admin, example.com
-dn: cn=admin,dc=example,dc=com
-objectClass: simpleSecurityObject
-objectClass: organizationalRole
-cn: admin
-description: LDAP administrator
-userPassword: {SSHA}y5RMbAWV01lJQoCziW/IPddhrPcH9wm8
+# dn: cn=admin,dc=example,dc=com
+# objectClass: simpleSecurityObject
+# objectClass: organizationalRole
+# cn: admin
+# description: LDAP administrator
+# userPassword: {SSHA}y5RMbAWV01lJQoCziW/IPddhrPcH9wm8
 
 # newton, example.com
 dn: uid=newton,dc=example,dc=com
@@ -29,12 +29,13 @@ objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
+objectClass: posixAccount
 uid: newton
 mail: newton@ldap.forumsys.com
 cn: Isaac Newton
-objectClass: posixAccount
 uidNumber: 3000
-gidNumber: 3000
+# users
+gidNumber: 100
 homeDirectory: /home/newton
 description: Isaac Newton
 # generated with slappasswd

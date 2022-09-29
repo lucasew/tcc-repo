@@ -20,17 +20,18 @@
       pam_password md5
     '';
   };
-  security.pam.services.sshd = {
-    makeHomeDir = true;
+  # security.pam.services.sshd = {
+  #   makeHomeDir = true;
   #   text = lib.mkDefault (
   #     lib.mkBefore ''
   #       auth required pam_listfile.so \
   #         item=group sense=allow onerr=fail file=/etc/allowed_groups
   #     ''
   #   );
-  };
-  security.pam.services.login.makeHomeDir = true;
+  # };
   security.pam.services.gdm-launch-environment.makeHomeDir = true;
+  security.pam.services.login.makeHomeDir = true;
+  security.pam.services.sshd.makeHomeDir = true;
   security.pam.services.systemd-user.makeHomeDir = true;
   systemd.services.nslcd = {
     after = [ "Network-Manager.service" ];
