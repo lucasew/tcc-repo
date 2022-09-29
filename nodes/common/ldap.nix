@@ -29,6 +29,9 @@
   #     ''
   #   );
   };
+  security.pam.services.login.makeHomeDir = true;
+  security.pam.services.gdm-launch-environment.makeHomeDir = true;
+  security.pam.services.systemd-user.makeHomeDir = true;
   systemd.services.nslcd = {
     after = [ "Network-Manager.service" ];
   };

@@ -37,8 +37,8 @@ uidNumber: 3000
 gidNumber: 3000
 homeDirectory: /home/newton
 description: Isaac Newton
+# generated with slappasswd
 userPassword: {SSHA}y5RMbAWV01lJQoCziW/IPddhrPcH9wm8
-# authPassword: password
 
 # einstein, example.com
 dn: uid=einstein,dc=example,dc=com
