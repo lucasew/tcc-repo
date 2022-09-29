@@ -20,6 +20,7 @@ objectClass: simpleSecurityObject
 objectClass: organizationalRole
 cn: admin
 description: LDAP administrator
+userPassword:: e1NIQX1XNnBoNU1tNVB6OEdnaVVMYlBnekczN21qOWc9
 
 # newton, example.com
 dn: uid=newton,dc=example,dc=com

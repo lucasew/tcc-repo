@@ -8,11 +8,11 @@
     daemon.enable = true;
     base = "dc=example,dc=com";
     bind.policy = "soft";
-    bind.distinguishedName = "cn=read-only-admin,dc=example,dc=com";
+    bind.distinguishedName = "cn=admin,dc=example,dc=com";
     # users: riemann gauss euler euclid
     bind.passwordFile = builtins.toFile "passwd-file" "password";
     # server = "ldap://192.168.100.50";
-    server = "ldap://ldap.forumsys.com";
+    server = "ldap://192.168.100.50";
     # useTLS = true;
     loginPam = true;
     extraConfig = ''
