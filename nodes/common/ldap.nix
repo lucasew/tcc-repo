@@ -7,7 +7,7 @@
   services.sssd.enable = true;
   services.sssd.config = ''
     [sssd]
-    config_file_version 2
+    config_file_version = 2
     domains = default
     services = nss, pam
 
