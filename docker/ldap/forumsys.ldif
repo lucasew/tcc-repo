@@ -31,7 +31,28 @@ gecos: John Doe
 loginShell: /bin/bash
 homeDirectory: /home/ldap/john
 
+dn: cn=mary,ou=Groups,dc=example,dc=com
+changetype: add
+objectClass: posixGroup
+cn: mary
+gidNumber: 10001
 
+dn: uid=mary,ou=People,dc=example,dc=com
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: mary
+sn: Doe
+givenName: Mary
+cn: Mary Doe
+displayName: Mary Doe
+uidNumber: 10001
+gidNumber: 10001
+userPassword: maryldap
+gecos: Mary Doe
+loginShell: /bin/bash
+homeDirectory: /home/ldap/mary
 
 # extended LDIF
 # dn: ou=People,dc=example,dc=com
