@@ -22,9 +22,11 @@ services:
     image: osixia/phpldapadmin:latest
     container_name: phpldapadmin
     environment:
-      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_LDAP_HOSTS: "rescue"
       PHPLDAPADMIN_HTTPS: "false"
     ports:
       - "8080:80"
+    links:
+      - "ldap:rescue"
     depends_on:
       - openldap
