@@ -11,14 +11,17 @@ in{
       name = "out.png";
       dontUnpack = true;
       src = pkgs.fetchurl {
-        url = "http://www.utfpr.edu.br/icones/cabecalho/logo-utfpr/@@images/efcf9caf-6d29-4c24-8266-0b7366ea3a40.png";
-        sha256 = "1gk744rkiqqla7k7qqdjicfaccryyxqwim8iv3di21k2d0glazns";
+        url = "https://static.wikia.nocookie.net/elderscrolls/images/6/63/Solitude.svg";
+        sha256 = "1vymi8ihw9006cxbbd5k16d0ilf5z7kyzgxcpwha0q0wl7262x0q";
       };
       nativeBuildInputs = with pkgs; [
-        imagemagick
+        inkscape
       ];
+      buildPhase = ''
+        inkscape --export-type="png" $src -o wallpaper.png -w 300 -h 420 -o wallpaper.png
+      '';
       installPhase = ''
-        convert -resize 50% $src $out
+        install -Dm0644 wallpaper.png $out
       '';
     };
   };
