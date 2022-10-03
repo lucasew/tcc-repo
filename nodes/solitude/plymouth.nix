@@ -18,7 +18,7 @@ in{
         inkscape
       ];
       buildPhase = ''
-        inkscape --export-type="png" $src -o wallpaper.png -w 300 -h 420 -o wallpaper.png
+        inkscape --export-type="png" $src -o wallpaper.png -w 150 -h 210 -o wallpaper.png
       '';
       installPhase = ''
         install -Dm0644 wallpaper.png $out
