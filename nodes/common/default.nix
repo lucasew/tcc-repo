@@ -6,6 +6,7 @@
     ./tuning.nix
     ./smart.nix
     ./memtest86.nix
+    ./preload.nix
   ];
   utfos.machine-group = ["common"];
   users.mutableUsers = true; # LDAP vai exigir isso provavelmente
