@@ -2,17 +2,28 @@
   imports = [
     ../bootstrap
     ./ldap.nix
+    ./dns.nix
+    ./tuning.nix
+    ./smart.nix
+    ./memtest86.nix
   ];
   utfos.machine-group = ["common"];
   users.mutableUsers = true; # LDAP vai exigir isso provavelmente
   # gui
   environment.systemPackages = with pkgs; [
-    htop
     chromium
+    curl
+    direnv
     firefox
-    spotify
+    htop
+    lm_sensors
+    neofetch
     pciutils
+    rlwrap
+    spotify
+    unrar
     usbutils
+    wget
   ];
   hardware.opengl = {
     enable = true;
