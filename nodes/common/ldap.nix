@@ -43,6 +43,7 @@
     extraConfig = ''
       ldap_version 3
       pam_password md5
+      validnames /.*/i
     '';
   };
   security.pam.services.sshd = {
