@@ -1,7 +1,8 @@
 {
   description = "UTFOS";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    # nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
   outputs = { self, nixpkgs, ... }@args:
