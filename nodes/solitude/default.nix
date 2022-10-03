@@ -20,5 +20,5 @@ in {
   boot.loader.grub.devices = [ "/dev/sda" ];
   nixpkgs.config.rocmTargets = [ "gfx000" "gfx803" ]; # rocm_agent_enumerator
   hardware.opengl.extraPackages = [ pkgs.rocm-opencl-icd ];
-
+  networking.hostName = "solitude";
 }
