@@ -1,0 +1,161 @@
+#!/usr/bin/env nix-shell
+#! nix-shell -i bash -p 
+
+# vim:ft=bash
+
+set -eu
+
+function list_partitions() {
+    sudo fdisk --bytes -l -o device,size "$@" | grep -e '^/dev' | while read -r device size; do
+        # size device fstype
+        fstype="$(lsblk -n -o FSTYPE "$device")"
+        if [ ! -z "$fstype" ]; then
+            echo "$size $device $fstype"
+        fi
+    done
+}
+
+function biggest_partition() {
+    part_type="$1"; shift
+    list_partitions "$@" | sort | while read -r size device fstype; do
+        if [ "$fstype" == "$part_type" ]; then
+            echo $device
+        fi
+    done | head -n 1
+}
+
+function get_esp_partitions() {
+    sudo fdisk -l "$@" | grep EFI | awk '{ print $1; }'
+}
+
+function simulate() {
+    printf "SIMULATE: [ "
+    while [ $# -gt 0 ]; do
+        printf "\"$1\" "
+        shift
+    done
+    printf "]\n"
+}
+
+function privileged() {
+    printf "PRIVILEGED: [ "
+    ARGS=()
+    while [ $# -gt 0 ]; do
+        printf "\"$1\" "
+        ARGS+=("$1")
+        shift
+    done
+    printf "]\n"
+    sudo "${ARGS[@]}"
+}
+
+function is_uefi() {
+    [ -d /sys/firmware/efi ]
+}
+
+function fsof() {
+    df "$1" | tail -n 1 | sed 's; ;\n;g' | tail -n 1
+}
+
+function mount_bootstrap_partitions() {
+    privileged umount --recursive /mnt
+    efi_part="$(get_esp_partitions "$@")"
+    rootfs_part="$(biggest_partition ext4 "$@")"
+    swap_part="$(biggest_partition swap "$@")"
+
+    if [ -z "$rootfs_part" ]; then
+        echo "erro: não tem partição ext4"
+        return
+    fi
+    privileged mount "$rootfs_part" /mnt
+    if is_uefi; then
+        if [ -z "$efi_part" ]; then
+            echo "erro: instalação UEFI sem partição ESP"
+            return
+        else
+            privileged mount $efi_part /mnt/boot
+        fi
+    fi
+    if [ ! -z $swap_part ]; then
+        privileged swapon $swap_part
+    fi
+}
+
+function generate_hardware_configuration() {
+    ARGS=()
+    if [ $# -gt 0 ]; then
+        ARGS+=(--root "$1")
+        shift
+    fi
+    nixos-generate-config --show-hardware-config "${ARGS[@]}"
+}
+
+function handle_old_system_backup() {
+    if [[ -v DONT_BACKUP ]]; then
+        echo "Pulando backup... (Motivo: DONT_BACKUP)"
+        return
+    fi
+    pushd /mnt
+    if [ ! -f /mnt/etc/NIXOS ]; then # /etc/NIXOS significa que já migrou
+        if [ -f /mnt/old-backup.tar.gz ]; then
+            echo "erro: Já existe um backup na pasta. Defina DONT_BACKUP para pular"
+            exit 1
+        fi
+        sudo rm /mnt/var/cache -rf
+        sudo tar -czvf /mnt/old-backup.tar.gz --exclude={"old-backup.tar.gz","dev/*","proc/*","sys/*","tmp/*","run/*","mnt/*","media/*","cdrom/*","lost+found","swapfile","var/cache"} .
+    fi
+    popd
+}
+
+function gen_build_config() {
+    echo 'let'
+    echo ' flake = builtins.getFlake "/nix/store/i4bjbd5wm5zb8w4hfgbd822faq6lvlj4-ryf4y63a6m607vmw3dqrixp87ch3clhp-source";'
+    echo '  system = flake.outputs.nixosConfigurations.demo.extendModules {'
+    echo '     modules = ['
+
+    echo '('
+    generate_hardware_configuration
+    echo ')'
+
+    echo '({...}: {'
+    if is_uefi; then
+        echo '
+        boot.loader.grub = {
+            efiSupport = true;
+            device = "nodev";
+        };
+        '
+    else
+        echo "      boot.loader.grub.devices = [ \"/dev/$(lsblk -ndo pkname "$(df /mnt | tail -n 1 | awk '{ print $1 }')")\" ];"
+    fi
+    echo '})'
+
+    echo '     ];'
+    echo '};'
+    echo 'in system.config.system.build.toplevel'
+}
+
+function gen_lustrate() {
+    if [ -f /mnt/etc/NIXOS_LUSTRATE ]; then
+        privileged rm /mnt/etc/NIXOS_LUSTRATE
+    fi
+    {
+        echo "old-backup.tar.gz"
+        echo "home"
+    } | privileged tee -a /mnt/etc/NIXOS_LUSTRATE
+}
+
+function nixos_install() {
+    closure="$1"; shift
+    privileged nixos-install --verbose --system "$closure" --show-trace
+}
+
+function do_install() {
+    mount_bootstrap_partitions "$@"
+    handle_old_system_backup
+    gen_build_config > /tmp/nixos.nix
+    nix-build /tmp/nixos.nix --show-trace -o /tmp/nixos-closure
+    gen_lustrate
+    nixos_install /tmp/nixos-closure
+    privileged umount /mnt --recursive
+}
