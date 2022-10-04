@@ -58,7 +58,7 @@ function fsof() {
 }
 
 function mount_bootstrap_partitions() {
-    privileged umount --recursive /mnt
+    privileged umount --recursive /mnt || true
     efi_part="$(get_esp_partitions "$@")"
     rootfs_part="$(biggest_partition ext4 "$@")"
     swap_part="$(biggest_partition swap "$@")"
@@ -114,7 +114,7 @@ function gen_build_config() {
     echo '     modules = ['
 
     echo '('
-    generate_hardware_configuration
+    generate_hardware_configuration /mnt
     echo ')'
 
     echo '({...}: {'
