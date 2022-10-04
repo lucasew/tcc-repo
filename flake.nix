@@ -41,6 +41,7 @@
     in nodes [
       "demo"
       "solitude"
+      "installer"
     ];
     inherit pkgs lib; # pra poder usar no nix-repl fácil só com :lf
     overlays = {
