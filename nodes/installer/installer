@@ -140,8 +140,14 @@ function gen_lustrate() {
         privileged rm /mnt/etc/NIXOS_LUSTRATE
     fi
     {
-        echo "old-backup.tar.gz"
-        echo "home"
+        echo old-backup.tar.gz
+        echo home
+        echo etc/ssh_host_ed25519_key
+        echo etc/ssh_host_ed25519_key.pub
+        echo etc/ssh_host_rsa_key
+        echo etc/ssh_host_rsa_key.pub
+        echo etc/machine-id
+        echo etc/NetworkManager/system-connections
     } | privileged tee -a /mnt/etc/NIXOS_LUSTRATE
 }
 
