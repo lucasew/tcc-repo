@@ -19,6 +19,12 @@
   }).config.system.build.toplevel;
   environment.etc."code".source = ../../.;
 
+  system.userActivationScripts = {
+    copyInstaller.text = ''
+      cp ${./installer} ~/installer
+    '';
+  };
+
   # defaults set up by the installer module that we don't want
   networking.wireless.enable = false;
 
