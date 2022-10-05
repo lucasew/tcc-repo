@@ -21,7 +21,7 @@
 
   system.userActivationScripts = {
     copyInstaller.text = ''
-      cp ${./installer} ~/installer
+      install -m755 ${./installer} ~/installer
     '';
   };
 
