@@ -109,7 +109,7 @@ function handle_old_system_backup() {
 
 function gen_build_config() {
     echo 'let'
-    echo ' flake = builtins.getFlake "/nix/store/i4bjbd5wm5zb8w4hfgbd822faq6lvlj4-ryf4y63a6m607vmw3dqrixp87ch3clhp-source";'
+    echo " flake = builtins.getFlake \"$(realpath /etc/code)\";"
     echo '  system = flake.outputs.nixosConfigurations.demo.extendModules {'
     echo '     modules = ['
 
