@@ -165,3 +165,5 @@ function do_install() {
     nixos_install /tmp/nixos-closure
     privileged umount /mnt --recursive
 }
+
+"$@"
