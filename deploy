@@ -6,10 +6,14 @@ TEMP_GCROOT=/tmp/nixosApplier-tcc
 
 if [ -v APPLY_NODE ]; then
     {
-        echo "Mandando dados da geração"
-        nix-copy-closure --to $APPLY_NODE $TEMP_GCROOT
-        echo "Aplicando geração"
-        echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S $(realpath $TEMP_GCROOT)/bin/switch-to-configuration "$@"
+        if [ $# -eq 1 ] && [ $1 == "ping" ]; then
+            echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S true && echo pong
+        else
+            echo "Mandando dados da geração"
+            nix-copy-closure --to $APPLY_NODE $TEMP_GCROOT
+            echo "Aplicando geração"
+            echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S $(realpath $TEMP_GCROOT)/bin/switch-to-configuration "$@"
+        fi
     } 2>&1 | while read line; do
         echo "[$APPLY_NODE - "$*"] $line"
     done
