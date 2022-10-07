@@ -8,10 +8,17 @@
     wantedBy = [ "multi-user.target" ];
     restartIfChanged = true;
     script = let
-      pathsToPrefetch = [
+      pathsToPrefetch = with pkgs; [
         "/etc/flake"
-        pkgs.firefox
-        pkgs.chromium
+        dbus
+        networkmanager
+        avahi
+        ananicy
+        cpufrequtils
+        k3s
+        udisks2
+        firefox
+        chromium
       ];
     in builtins.concatStringsSep "\n" (map (path: ''
       echo "Preloading path: ${path}"
