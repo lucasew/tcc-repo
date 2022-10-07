@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -eu
+
+TEMP_GCROOT=/tmp/nixosApplier-tcc
+
+if [ -v APPLY_NODE ]; then
+    {
+        echo "Mandando dados da geração"
+        nix-copy-closure --to $APPLY_NODE $TEMP_GCROOT
+        echo "Aplicando geração"
+        echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S $(realpath $TEMP_GCROOT)/bin/switch-to-configuration "$@"
+    } 2>&1 | while read line; do
+        echo "[$APPLY_NODE - "$*"] $line"
+    done
+else
+    printf "senha sudo: "
+    read -s password
+    nix build '.#nixosApplier' -o $TEMP_GCROOT
+    for node in 192.168.0.10{1,2,3}; do
+        APPLY_NODE="$node" SUDO_PASSWORD=$password "$0" "$@" &
+    done
+    wait $(jobs -p)
+    echo "Deploy finalizado"
+fi
+
