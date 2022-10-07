@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 # credits for
 # - https://mt-caret.github.io/blog/posts/2020-07-25-ldap-client-with-nixos.html
 # - https://www.forumsys.com/2022/05/10/online-ldap-test-server/
@@ -37,7 +37,7 @@
     bind.policy = "soft";
     bind.distinguishedName = "cn=admin,dc=example,dc=com";
     bind.passwordFile = builtins.toFile "passwd-file" "password";
-    server = "ldap://192.168.100.50";
+    server = "ldap://server.${config.networking.domain}";
     # useTLS = true;
     loginPam = true;
     extraConfig = ''

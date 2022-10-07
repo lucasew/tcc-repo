@@ -6,6 +6,7 @@
 domain-needed
 bogus-priv
 hostsdir=/etc/extraHosts
+address=/server.${config.networking.domain}/192.168.0.100
 address=/controlplane.${config.networking.domain}/192.168.0.101
 address=/solitude.${config.networking.domain}/192.168.0.101
 address=/markarth.${config.networking.domain}/192.168.0.102
