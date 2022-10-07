@@ -42,10 +42,27 @@
       "demo"
       "solitude"
       "installer"
+      "morthal"
+      "markarth"
     ];
     inherit pkgs lib; # pra poder usar no nix-repl fácil só com :lf
     overlays = {
       this = import ./overlay.nix self;
+    };
+    inherit self;
+    release = pkgs.stdenv.mkDerivation {
+      name = "release";
+      dontUnpack = true;
+      paths = []
+      ++ (map (conf: conf.config.system.build.toplevel) (builtins.attrValues {
+        inherit (self.outputs.nixosConfigurations) solitude installer morthal markarth;
+      }))
+        ;
+      installPhase = ''
+        for p in "${"$"}{paths[@]}"; do
+          echo $p
+        done > $out
+      '';
     };
   };
 }
