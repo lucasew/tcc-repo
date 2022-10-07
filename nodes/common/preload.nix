@@ -8,10 +8,11 @@
     wantedBy = [ "multi-user.target" ];
     restartIfChanged = true;
     script = let
-      pathsToPrefetch =
-      config.environment.systemPackages
-        ++ ([
-        ]);
+      pathsToPrefetch = [
+        "/etc/flake"
+        pkgs.firefox
+        pkgs.chromium
+      ];
     in builtins.concatStringsSep "\n" (map (path: ''
       echo "Preloading path: ${path}"
       nice -n 19 ionice -c 2 -n 7 vmtouch -tf "${path}"
@@ -21,7 +22,7 @@
     description = "Preloads file structure of the closure of the current system";
     path = with pkgs; [
       util-linux # ionice
-      findutils       # list folders
+      findutils  # list folders
       nix        # list dependencies
     ];
     wantedBy = [ "multi-user.target" ];
