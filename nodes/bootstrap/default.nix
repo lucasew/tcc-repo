@@ -44,4 +44,6 @@ Hostname: ${config.networking.hostName}
   # mesmo resetando a máquina mexer aqui não é necessário
   system.stateVersion = lib.mkDefault "22.05";
 
+  networking.domain = "example.com";
+
 }

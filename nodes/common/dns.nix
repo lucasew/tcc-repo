@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   services.dnsmasq = {
     enable = true;
     servers = [ "8.8.8.8" "8.8.4.4" ];
@@ -6,6 +6,10 @@
 domain-needed
 bogus-priv
 hostsdir=/etc/extraHosts
+address=/controlplane.${config.networking.domain}/192.168.0.101
+address=/solitude.${config.networking.domain}/192.168.0.101
+address=/markarth.${config.networking.domain}/192.168.0.102
+address=/morthal.${config.networking.domain}/192.168.0.103
     '';
   };
 }
