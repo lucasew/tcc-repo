@@ -6,14 +6,21 @@ TEMP_GCROOT=/tmp/nixosApplier-tcc
 
 if [ -v APPLY_NODE ]; then
     {
-        if [ $# -eq 1 ] && [ $1 == "ping" ]; then
-            echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S systemd-inhibit true && echo pong
-        else
-            echo "Mandando dados da geração"
-            nix-copy-closure --to $APPLY_NODE $TEMP_GCROOT
-            echo "Aplicando geração"
-            echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S systemd-inhibit  $(realpath $TEMP_GCROOT)/bin/switch-to-configuration "$@"
-        fi
+        CMD="$1"; shift
+        case "$CMD" in
+            ping)
+                echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S systemd-inhibit true && echo pong
+            ;;
+            logs)
+                echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S systemd-inhibit journalctl -f
+            ;;
+            *)
+                echo "Mandando dados da geração"
+                nix-copy-closure --to $APPLY_NODE $TEMP_GCROOT
+                echo "Aplicando geração"
+                echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S systemd-inhibit  $(realpath $TEMP_GCROOT)/bin/switch-to-configuration "$CMD" "$@"
+            ;;
+        esac
     } 2>&1 | while read line; do
         echo "[$APPLY_NODE - "$*"] $line"
     done
