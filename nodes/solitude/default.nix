@@ -18,4 +18,5 @@ in {
   hardware.opengl.extraPackages = [ pkgs.rocm-opencl-icd ];
   networking.hostName = "solitude";
   services.k3s.role = "server";
+  networking.firewall.allowedTCPPorts = [ 6443 ];
 }
