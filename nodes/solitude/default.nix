@@ -10,6 +10,7 @@ in {
     ./hardware-configuration.nix
     ./plymouth.nix
     ./keyboard.nix
+    ./ldap_server.nix
     ../gui-common/default.nix
   ];
   utfos.machine-group = [ "poc" ];
