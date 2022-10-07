@@ -51,7 +51,7 @@
     };
     inherit self;
     nixosApplier = pkgs.writeShellScriptBin "switch-to-configuration" ''
-      case "$(hostname)" of
+      case "$(hostname)" in
          ${builtins.concatStringsSep "\n" ((map (conf: ''
            ${conf.config.networking.hostName})
             ${conf.config.system.build.toplevel}/bin/switch-to-configuration "$@"
@@ -59,7 +59,9 @@
         '') (builtins.attrValues {
         inherit (self.outputs.nixosConfigurations) solitude installer morthal markarth;
       })))}
-}
+          *)
+            echo "Este sistema não é conhecido"
+          ;;
       esac
     '';
     release = pkgs.stdenv.mkDerivation {
