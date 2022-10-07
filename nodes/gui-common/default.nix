@@ -6,5 +6,6 @@
     ./containers.nix
     ./gnome.nix
     ./motd.nix
+    ./kubernetes.nix
   ];
 }
