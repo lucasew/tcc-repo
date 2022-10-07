@@ -50,6 +50,18 @@
       this = import ./overlay.nix self;
     };
     inherit self;
+    nixosApplier = pkgs.writeShellScriptBin "switch-to-configuration" ''
+      case "$(hostname)" of
+         ${builtins.concatStringsSep "\n" ((map (conf: ''
+           ${conf.config.networking.hostName})
+            ${conf.config.system.build.toplevel}/bin/switch-to-configuration "$@"
+           ;;
+        '') (builtins.attrValues {
+        inherit (self.outputs.nixosConfigurations) solitude installer morthal markarth;
+      })))}
+}
+      esac
+    '';
     release = pkgs.stdenv.mkDerivation {
       name = "release";
       dontUnpack = true;
