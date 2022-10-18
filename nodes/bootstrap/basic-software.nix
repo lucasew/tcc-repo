@@ -7,6 +7,12 @@
     tmux
     xclip
     neofetch
+    curl
+    lm_sensors
+    pciutils
+    rlwrap
+    usbutils
+    wget
   ];
   environment.variables.EDITOR = lib.mkDefault "nano";
 }

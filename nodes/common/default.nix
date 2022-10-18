@@ -6,25 +6,16 @@
     ./tuning.nix
     ./smart.nix
     ./memtest86.nix
-    ./preload.nix
+    # ./preload.nix
   ];
   utfos.machine-group = ["common"];
   users.mutableUsers = true; # LDAP vai exigir isso provavelmente
   # gui
   environment.systemPackages = with pkgs; [
-    chromium
-    curl
     direnv
-    firefox
     htop
-    lm_sensors
     neofetch
-    pciutils
-    rlwrap
-    spotify
     unrar
-    usbutils
-    wget
   ];
   hardware.opengl = {
     enable = true;

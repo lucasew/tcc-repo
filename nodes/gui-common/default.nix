@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../common/default.nix
@@ -7,5 +7,10 @@
     ./gnome.nix
     ./motd.nix
     ./kubernetes.nix
+  ];
+  environment.systemPackages = with pkgs; [
+    chromium
+    firefox
+    spotify
   ];
 }

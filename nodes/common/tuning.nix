@@ -7,7 +7,7 @@
     cleanTmpDir = true;
   };
   services = {
-    irqbalance.enable = true;
-    ananicy.enable = true;
+    # irqbalance.enable = true;
+    # ananicy.enable = true;
   };
 }
