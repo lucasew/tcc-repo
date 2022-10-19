@@ -12,5 +12,6 @@
     chromium
     firefox
     spotify
+    nbr.appimage-wrap
   ];
 }
