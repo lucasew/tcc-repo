@@ -14,6 +14,9 @@ if [ -v APPLY_NODE ]; then
             logs)
                 echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S systemd-inhibit journalctl -f
             ;;
+            run)
+                ssh -t $APPLY_NODE "$@"
+            ;;
             *)
                 echo "Mandando dados da geração"
                 nix-copy-closure --to $APPLY_NODE $TEMP_GCROOT
@@ -25,11 +28,24 @@ if [ -v APPLY_NODE ]; then
         echo "[$APPLY_NODE - "$*"] $line"
     done
 else
-    printf "senha sudo: "
-    read -s password
-    nix build '.#nixosApplier' -o $TEMP_GCROOT
+    case "$1" in
+        ping|run)
+            true
+        ;;
+        logs)
+            printf "senha sudo: "
+            read -s password
+            export SUDO_PASSWORD=$password
+        ;;
+        *)
+            printf "senha sudo: "
+            read -s password
+            export SUDO_PASSWORD=$password
+            nix build '.#nixosApplier' -o $TEMP_GCROOT
+        ;;
+    esac
     for node in 192.168.0.10{1,2,3}; do
-        APPLY_NODE="$node" SUDO_PASSWORD=$password "$0" "$@" &
+        APPLY_NODE="$node" "$0" "$@" &
     done
     wait $(jobs -p)
     echo "Deploy finalizado"
