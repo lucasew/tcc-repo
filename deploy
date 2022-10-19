@@ -41,7 +41,7 @@ else
             printf "senha sudo: "
             read -s password
             export SUDO_PASSWORD=$password
-            nix build '.#nixosApplier' -o $TEMP_GCROOT
+            nix build '.#nixosApplier' -o $TEMP_GCROOT --show-trace
         ;;
     esac
     for node in 192.168.0.10{1,2,3}; do
