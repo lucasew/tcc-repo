@@ -4,8 +4,9 @@
     # nixpkgs.url = "nixpkgs/nixos-22.05";
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nbr.url = "github:nixosbrasil/nixpkgs-brasil";
   };
-  outputs = { self, nixpkgs, ... }@args:
+  outputs = { self, nixpkgs, nbr, ... }@args:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -13,6 +14,11 @@
       config = {
         allowUnfree = true;
       };
+      overlays = [
+        (self: super: {
+          nbr = import "${nbr}" { pkgs = super; };
+        })
+      ];
     };
     inherit (nixpkgs) lib;
     inherit (lib) concatStringsSep attrValues mapAttrs listToAttrs;
