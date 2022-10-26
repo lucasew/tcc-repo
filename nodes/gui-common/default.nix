@@ -14,5 +14,6 @@
     firefox
     spotify
     nbr.appimage-wrap
+    distrobox
   ];
 }

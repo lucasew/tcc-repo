@@ -14,6 +14,9 @@ if [ -v APPLY_NODE ]; then
             logs)
                 echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S systemd-inhibit journalctl -f
             ;;
+            sudo-run)
+                echo $SUDO_PASSWORD | ssh -t $APPLY_NODE sudo -S "$@"
+            ;;
             run)
                 ssh -t $APPLY_NODE "$@"
             ;;
@@ -31,6 +34,11 @@ else
     case "$1" in
         ping|run)
             true
+        ;;
+        sudo-run)
+            printf "senha sudo: "
+            read -s password
+            export SUDO_PASSWORD=$password
         ;;
         logs)
             printf "senha sudo: "
