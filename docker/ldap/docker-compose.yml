@@ -27,6 +27,6 @@ services:
     ports:
       - "8080:80"
     links:
-      - "ldap:rescue"
+      - "openldap:rescue"
     depends_on:
       - openldap
