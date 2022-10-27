@@ -25,10 +25,4 @@ in{
       '';
     };
   };
-  boot.initrd.kernelModules = [ "uvesafb" ];
-  boot.initrd.extraFiles."/usr/v86d".source = v86d;
-  boot.kernelParams = [
-    "video=uvesafb:mode:${config.boot.loader.grub.gfxmodeBios}-32,mtrr:3,ywrap"
-    ''uvesafb.v86d="${v86d}/bin/v86d"''
-  ];
 }

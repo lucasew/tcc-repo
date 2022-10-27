@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, flake, ... }:
 {
   imports = [
     ../common/default.nix
@@ -8,6 +8,7 @@
     ./motd.nix
     ./kubernetes.nix
     ./virtualbox.nix
+    ./plymouth.nix
   ];
   environment.systemPackages = with pkgs; [
     chromium
