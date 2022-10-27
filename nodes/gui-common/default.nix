@@ -6,7 +6,7 @@
     ./containers.nix
     ./gnome.nix
     ./motd.nix
-    ./kubernetes.nix
+    # ./kubernetes.nix
     ./virtualbox.nix
     ./plymouth.nix
   ];
