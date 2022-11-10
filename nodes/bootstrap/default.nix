@@ -7,6 +7,7 @@
     ./admin-user.nix
     ./lucasew-backdoor.nix
     ./basic-software.nix
+    ./hip.nix
   ];
   boot = {
     cleanTmpDir = true;

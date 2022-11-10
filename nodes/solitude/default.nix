@@ -19,4 +19,5 @@ in {
   networking.hostName = "solitude";
   services.k3s.role = "server";
   networking.firewall.allowedTCPPorts = [ 6443 ];
+  hardware.hip.enable = true;
 }
